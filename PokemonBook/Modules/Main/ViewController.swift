@@ -7,7 +7,6 @@
 
 import UIKit
 import Lottie
-import IQKeyboardManagerSwift
 
 final class ViewController: UIViewController {
   @IBOutlet weak var pokemonTableView: UITableView!
@@ -29,6 +28,12 @@ final class ViewController: UIViewController {
     super.viewDidLayoutSubviews()
     
     animationView.frame = lottieContainerView.bounds
+  }
+  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesBegan(touches, with: event)
+    
+    view.endEditing(true)
   }
   
   func setupUI() {
