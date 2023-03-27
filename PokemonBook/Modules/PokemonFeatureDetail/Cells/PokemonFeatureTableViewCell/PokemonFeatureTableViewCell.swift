@@ -46,13 +46,10 @@ extension PokemonFeatureTableViewCell: UICollectionViewDataSource {
   }
 }
 
-extension PokemonFeatureTableViewCell: UICollectionViewDelegate {
-  
-}
-
 extension PokemonFeatureTableViewCell: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     if let abilityDetail = pokemonFeature?.featureDetails[indexPath.section].abilityDetails[indexPath.row] {
+      
       let horizontalMargin = 20.0 // 10 + 10
       let title = abilityDetail.title.key + ": " + abilityDetail.title.value
       let description = abilityDetail.description.key + ": " + abilityDetail.description.value

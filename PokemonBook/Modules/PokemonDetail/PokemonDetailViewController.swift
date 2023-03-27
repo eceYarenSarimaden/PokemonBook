@@ -38,7 +38,6 @@ final class PokemonDetailViewController: UIViewController {
     pokemonImageView.kf.setImage(with: viewModel.imageURL)
     
     viewModel.downloadPokemonImage()
-
     pokemonDetailTableView.reloadData()
   }
   
@@ -54,7 +53,6 @@ extension PokemonDetailViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCellIdentifier.pokemonDetail , for: indexPath) as! PokemonDetailTableViewCell
-    
     let pokemonDetail = viewModel.pokemonDetails[indexPath.row]
     
     cell.configure(pokemonDetail: pokemonDetail)
@@ -79,7 +77,7 @@ extension PokemonDetailViewController: UITableViewDelegate {
     let pokemonFeatureDetailViewController = UIStoryboard.viewController(fromStoryboard: StoryboardIdentifier.pokemonFeatureDetail) as! PokemonFeatureDetailViewController
     pokemonFeatureDetailViewController.viewModel.pokemon = viewModel.pokemon
     pokemonFeatureDetailViewController.viewModel.pokemonDetail = selectedDetail
- 
+    
     navigationController?.presentPanModal(pokemonFeatureDetailViewController)
   }
 }

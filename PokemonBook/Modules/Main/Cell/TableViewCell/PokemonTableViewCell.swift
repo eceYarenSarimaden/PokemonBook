@@ -56,7 +56,6 @@ final class PokemonTableViewCell: UITableViewCell {
       abilityLabel.attributedText = abilityAttributedString
     }
     
-    
     // Experience
     let experienceAttributedString = NSMutableAttributedString(string: "Experience: ", attributes: [
       .font: UIFont.systemFont(ofSize: 17, weight: .bold)

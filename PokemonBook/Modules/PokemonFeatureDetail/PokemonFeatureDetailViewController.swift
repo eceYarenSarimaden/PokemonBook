@@ -15,11 +15,11 @@ final class PokemonFeatureDetailViewController: UIViewController {
   
   let viewModel = PokemonFeatureDetailViewModel()
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-      setupUI()
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    setupUI()
+  }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -33,7 +33,7 @@ final class PokemonFeatureDetailViewController: UIViewController {
     featureTableView.register(nib, forCellReuseIdentifier: "PokemonFeatureTableViewCell")
     
     titleLabel.text = viewModel.pokemonDetail.type.title
-
+    
     switch viewModel.pokemonDetail.type {
     case .abilities:
       viewModel.requestAbility { [weak self] in
@@ -72,7 +72,7 @@ extension PokemonFeatureDetailViewController: PanModalPresentable {
   }
   
   var shortFormHeight: PanModalHeight {
-   return .contentHeight(350)
+    return .contentHeight(350)
   }
   
   var longFormHeight: PanModalHeight {
@@ -96,7 +96,6 @@ extension PokemonFeatureDetailViewController: UITableViewDataSource {
     
     cell.configure(pokemonFeature: feature)
     cell.selectionStyle = .none
-    
     
     return cell
   }

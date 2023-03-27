@@ -12,7 +12,6 @@ final class ViewController: UIViewController {
   @IBOutlet weak var pokemonTableView: UITableView!
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var categoryTypeCollectionView: UICollectionView!
-  
   @IBOutlet weak var blurEffectView: UIVisualEffectView!
   @IBOutlet weak var lottieContainerView: UIView!
   
@@ -47,6 +46,7 @@ final class ViewController: UIViewController {
       self?.viewModel.filteredPokemons = (self?.viewModel.pokemons)!
       
       self?.viewModel.updateCategoryTypes()
+      self?.viewModel.updatePokemons()
       
       self?.categoryTypeCollectionView.reloadData()
       self?.pokemonTableView.reloadData()
@@ -67,7 +67,7 @@ final class ViewController: UIViewController {
   }
 }
 
-  //MARK: - TABLEVIEW
+//MARK: - TABLEVIEW
 extension ViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return viewModel.filteredPokemons.count
@@ -92,132 +92,11 @@ extension ViewController: UITableViewDelegate {
     pokemonDetailViewController.viewModel.title = name ?? ""
     pokemonDetailViewController.viewModel.imageURL = imageURL
     pokemonDetailViewController.viewModel.pokemon = selectedPokemon
-    pokemonDetailViewController.viewModel.pokemonDetails = getPokemonDetails(pokemon: selectedPokemon)
- 
+    pokemonDetailViewController.viewModel.pokemonDetails = viewModel.getPokemonDetails(pokemon: selectedPokemon)
+    
     UISelectionFeedbackGenerator().selectionChanged()
     
     navigationController?.pushViewController(pokemonDetailViewController, animated: true)
-  }
-  
-  func getPokemonDetails(pokemon: Pokemon) -> [PokemonDetail] {
-    var pokemonDetails: [PokemonDetail] = []
-    
-    if let experience = pokemon.experience {
-      let pokemonDetail = PokemonDetail(type: .baseExperience, value: experience.description)
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-    if let height = pokemon.height {
-      let pokemonDetail = PokemonDetail(type: .height, value: height.description)
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-    if let weight = pokemon.weight {
-      let pokemonDetail = PokemonDetail(type: .weight, value: weight.description)
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-    if let order = pokemon.order {
-      let pokemonDetail = PokemonDetail(type: .order, value: order.description)
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-    if let id = pokemon.id {
-      let pokemonDetail = PokemonDetail(type: .id, value: id.description)
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-    if let isDefault = pokemon.isDefault {
-      let pokemonDetail = PokemonDetail(type: .isDefault, value: isDefault.description)
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-    if let abilities = pokemon.abilities {
-      let pokemonDetail = PokemonDetail(type: .abilities)
-      
-      for ability in abilities {
-        if let ability = ability.ability {
-          pokemonDetail.results.append(ability)
-        }
-      }
-      
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-    if let forms = pokemon.forms {
-      let pokemonDetail = PokemonDetail(type: .forms)
-      
-      for form in forms {
-        pokemonDetail.results.append(form)
-      }
-      
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-//    if let gameIndices = pokemon.gameIndices {
-//      let pokemonDetail = PokemonDetail(type: .gameIndices)
-//
-//      for gameIndice in gameIndices {
-//        if let gameIndice = gameIndice.version {
-//          pokemonDetail.results.append(gameIndice)
-//        }
-//      }
-//
-//      pokemonDetails.append(pokemonDetail)
-//    }
-    
-    if let moves = pokemon.moves {
-      let pokemonDetail = PokemonDetail(type: .moves)
-      
-      for move in moves {
-        if let move = move.move {
-          pokemonDetail.results.append(move)
-        }
-      }
-      
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-//    if let species = pokemon.species {
-//      let pokemonDetail = PokemonDetail(type: .species)
-//      pokemonDetail.results.append(species)
-//      
-//      pokemonDetails.append(pokemonDetail)
-//    }
-    
-//    if let sprites = pokemon.sprites {
-//      let pokemonDetail = PokemonDetail(type: .sprites)
-//
-//      pokemonDetail.results.append(species)
-//
-//      pokemonDetails.append(pokemonDetail)
-//    }
-    
-    if let stats = pokemon.stats {
-      let pokemonDetail = PokemonDetail(type: .stats)
-      
-      for stat in stats {
-        if let stat = stat.stat {
-          pokemonDetail.results.append(stat)
-        }
-      }
-      
-      pokemonDetails.append(pokemonDetail)
-    }
-    
-//    if let types = pokemon.types {
-//      let pokemonDetail = PokemonDetail(type: .types)
-//
-//      for type in types {
-//        if let type = type.type {
-//          pokemonDetail.results.append(type)
-//        }
-//      }
-//
-//      pokemonDetails.append(pokemonDetail)
-//    }
-
-    return pokemonDetails
   }
 }
 
@@ -225,6 +104,9 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UISearchBarDelegate {
   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
     viewModel.searchBarText = searchText
+    viewModel.updatePokemons()
+    
+    pokemonTableView.reloadData()
   }
 }
 
@@ -236,22 +118,30 @@ extension ViewController: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCellIdentifier.categoryType, for: indexPath) as! CategoryTypeCollectionViewCell
-    
     let categoryType = viewModel.categoryTypes[indexPath.row]
     
-    cell.configure(categoryName: categoryType.type, isSelected: categoryType.isSelected)
+    cell.configure(categoryName: categoryType.type.capitalizeFirstLetter(), isSelected: categoryType.isSelected)
     
     return cell
+  }
+}
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: (categoryTypeCollectionView.frame.width - 20) / 3 , height: 50)
   }
 }
 
 extension ViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let selectedCategoryType = viewModel.categoryTypes[indexPath.row]
+    
+    viewModel.categoryTypes.forEach { $0.isSelected = false }
     selectedCategoryType.isSelected = !selectedCategoryType.isSelected
     
+    viewModel.updateCategoryTypes()
     viewModel.updatePokemons()
-
+    
     categoryTypeCollectionView.reloadData()
     pokemonTableView.reloadData()
   }

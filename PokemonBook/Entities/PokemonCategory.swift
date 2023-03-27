@@ -23,5 +23,4 @@ final class PokemonCategory: Hashable {
   static func == (lhs: PokemonCategory, rhs: PokemonCategory) -> Bool {
     return lhs.type == rhs.type
   }
-  
 }

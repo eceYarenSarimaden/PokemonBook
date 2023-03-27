@@ -10,7 +10,6 @@ import Foundation
 final class PokemonFeatureDetailViewModel {
   var pokemon: Pokemon!
   var pokemonDetail: PokemonDetail!
-  
   var pokemonFeatures: [PokemonFeature] = []
   
   func requestAbility(completion: @escaping (() -> Void)) {

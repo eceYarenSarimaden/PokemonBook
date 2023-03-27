@@ -54,6 +54,7 @@
 		6CCF75D729CDF043009FD5FE /* PokemonDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CCF75D529CDF043009FD5FE /* PokemonDetailTableViewCell.xib */; };
 		6CCF75D929CDF703009FD5FE /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCF75D829CDF702009FD5FE /* ViewModel.swift */; };
 		6CCF75DD29CE1D28009FD5FE /* PokemonCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCF75DC29CE1D28009FD5FE /* PokemonCategory.swift */; };
+		6CCF75E329D11F61009FD5FE /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CCF75E229D11F61009FD5FE /* ArrayExtension.swift */; };
 		F7014D56EBA13F28313A22D0 /* Pods_PokemonBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35785F838C3B457A4EB8426D /* Pods_PokemonBook.framework */; };
 /* End PBXBuildFile section */
 
@@ -108,6 +109,7 @@
 		6CCF75D529CDF043009FD5FE /* PokemonDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PokemonDetailTableViewCell.xib; sourceTree = "<group>"; };
 		6CCF75D829CDF702009FD5FE /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6CCF75DC29CE1D28009FD5FE /* PokemonCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonCategory.swift; sourceTree = "<group>"; };
+		6CCF75E229D11F61009FD5FE /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		A39F2CD68C1722F911B28AAF /* Pods-PokemonBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonBook.debug.xcconfig"; path = "Target Support Files/Pods-PokemonBook/Pods-PokemonBook.debug.xcconfig"; sourceTree = "<group>"; };
 		F22E0B57BC649AF1A57904CB /* Pods-PokemonBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PokemonBook.release.xcconfig"; path = "Target Support Files/Pods-PokemonBook/Pods-PokemonBook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -298,6 +300,7 @@
 				6C421BBC29CBA06B005A6FEE /* UITableViewExtension.swift */,
 				6C421BBE29CBA0A1005A6FEE /* StringExtension.swift */,
 				6CCF75CF29CDED1A009FD5FE /* UIStoryboardExtension.swift */,
+				6CCF75E229D11F61009FD5FE /* ArrayExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				6C421BDF29CBC0BD005A6FEE /* PokemonManager.swift in Sources */,
 				6C421BD129CBB4E8005A6FEE /* PokemonMove.swift in Sources */,
 				6C421BBF29CBA0A1005A6FEE /* StringExtension.swift in Sources */,
+				6CCF75E329D11F61009FD5FE /* ArrayExtension.swift in Sources */,
 				14E9E40229CF17CA00AC17C3 /* PokemonFeature.swift in Sources */,
 				6C421B9029CB7A43005A6FEE /* SceneDelegate.swift in Sources */,
 				6C421BE129CBC115005A6FEE /* APIService.swift in Sources */,

@@ -10,6 +10,7 @@ import UIKit
 extension UITableView {
   var contentSizeHeight: CGFloat {
     var height = CGFloat(0)
+    
     for section in 0..<numberOfSections {
       height = height + rectForHeader(inSection: section).height
       let rows = numberOfRows(inSection: section)

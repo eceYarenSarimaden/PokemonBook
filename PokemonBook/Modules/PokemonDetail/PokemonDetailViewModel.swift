@@ -12,7 +12,6 @@ final class PokemonDetailViewModel {
   var title = "Pokemon"
   var imageURL: URL?
   var image: UIImage?
-  
   var pokemon: Pokemon!
   var pokemonDetails: [PokemonDetail] = []
   
