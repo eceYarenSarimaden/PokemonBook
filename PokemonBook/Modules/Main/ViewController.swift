@@ -33,7 +33,6 @@ final class ViewController: UIViewController {
   
   func setupUI() {
     title = "Pokemons"
-    hideKeyboardWhenTappedAround()
     
     let tableViewCellNib = UINib(nibName: "PokemonTableViewCell", bundle: nil)
     pokemonTableView.register(tableViewCellNib, forCellReuseIdentifier: "PokemonTableViewCell")
