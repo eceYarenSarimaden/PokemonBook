@@ -9,5 +9,5 @@ target 'PokemonBook' do
   pod 'Kingfisher', '~> 7.0'
   pod 'PanModal'
   pod 'lottie-ios'
-  
+  pod 'IQKeyboardManagerSwift', '6.3.0'
 end

@@ -7,6 +7,7 @@
 
 import UIKit
 import Lottie
+import IQKeyboardManagerSwift
 
 final class ViewController: UIViewController {
   @IBOutlet weak var pokemonTableView: UITableView!
@@ -32,6 +33,7 @@ final class ViewController: UIViewController {
   
   func setupUI() {
     title = "Pokemons"
+    hideKeyboardWhenTappedAround()
     
     let tableViewCellNib = UINib(nibName: "PokemonTableViewCell", bundle: nil)
     pokemonTableView.register(tableViewCellNib, forCellReuseIdentifier: "PokemonTableViewCell")
@@ -136,9 +138,13 @@ extension ViewController: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let selectedCategoryType = viewModel.categoryTypes[indexPath.row]
     
-    viewModel.categoryTypes.forEach { $0.isSelected = false }
-    selectedCategoryType.isSelected = !selectedCategoryType.isSelected
-    
+    if selectedCategoryType.isSelected == true {
+      selectedCategoryType.isSelected = false
+    } else {
+      viewModel.categoryTypes.forEach { $0.isSelected = false }
+      selectedCategoryType.isSelected = !selectedCategoryType.isSelected
+    }
+
     viewModel.updateCategoryTypes()
     viewModel.updatePokemons()
     
